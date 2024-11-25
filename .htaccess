@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Определить язык пользователя
+RewriteCond %{HTTP:Accept-Language} ^(ru|en) [NC]
+RewriteCond %{REQUEST_URI} !^/(ru|en)/ [NC]
+RewriteRule ^(.*)$ /%1/$1 [L,R=302]
+
+# Если язык недоступен, перенаправлять на язык по умолчанию
+RewriteCond %{REQUEST_URI} !^/(ru|en)/ [NC]
+RewriteRule ^(.*)$ /en/$1 [L,R=302]
